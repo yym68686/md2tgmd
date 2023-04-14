@@ -10,6 +10,7 @@ from md2tgmd import escape
 text = '''
 # title
 
+**bold**
 ```
 # comment
 print(qwer) # ferfe
@@ -32,54 +33,49 @@ ni1
 print("1.1")_
 ```
 
-And simple text with + some - symbols.
+And simple text with + some - **symbols**.
 
-"Hello, World!"：
 
 ```
 print("Hello, World!")
 ```
-
-Python .py "Hello, World!"
 '''
 
 print(escape(text))
 
 
 '''
-*title*
+▎*title*
 
+*bold*
 ```
 \# comment
 print(qwer) \# ferfe
 ni1
 ```
-*bn*
+▎*bn*
 
-*b*
+▎*b*
 
-*Header*
-*Subheader*
+▎*Header*
+▎*Subheader*
 
 [1\.0\.0](http://version\.com)
 
-•  item 1 \-
-•  item 2
-•  item 3 \~
+• item 1 \-
+• item 2
+• item 3 \~
 
 ```python
 print("1\.1")\_
 ```
 
-And simple text with \+ some \- symbols\.
+And simple text with \+ some \- *symbols*\.
 
-"Hello, World\!"：
 
 ```
 print("Hello, World\!")
 ```
-
-Python \.py "Hello, World\!"
 
 '''
 

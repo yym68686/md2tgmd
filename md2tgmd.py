@@ -32,7 +32,7 @@ def escape(text):
     text = re.sub(r"\n\*\s", '\n\n• ', text)
     text = re.sub(r"\*", '\*', text)
     text = re.sub(r"\@{3}(.*?)\@{3}", '*\\1*', text)
-    text = re.sub(r"\[(.*?)\]\((.*?)\)", '@@@\\1@@@^^^\\2^^^', text)
+    text = re.sub(r"\!?\[(.*?)\]\((.*?)\)", '@@@\\1@@@^^^\\2^^^', text)
     text = re.sub(r"\[", '\[', text)
     text = re.sub(r"\]", '\]', text)
     text = re.sub(r"\(", '\(', text)
@@ -70,6 +70,7 @@ ni1
 ## Subheader
 
 [1.0.0](http://version.com)
+![1.0.0](http://version.com)
 
 - item 1 -
 * item 2

@@ -29,7 +29,7 @@ def escape(text):
     # must be escaped with the preceding character '\'.
     text = re.sub(r"_", '\_', text)
     text = re.sub(r"\*{2}(.*?)\*{2}", '@@@\\1@@@', text)
-    text = re.sub(r"\n\*\s", '\n• ', text)
+    text = re.sub(r"\n\*\s", '\n\n• ', text)
     text = re.sub(r"\*", '\*', text)
     text = re.sub(r"\@{3}(.*?)\@{3}", '*\\1*', text)
     # text = re.sub(r"\[", '\[', text)
@@ -41,7 +41,7 @@ def escape(text):
     text = escapeshape(text)
     text = re.sub(r"#", '\#', text)
     text = re.sub(r"\+", '\+', text)
-    text = re.sub(r"\n-\s", '\n• ', text)
+    text = re.sub(r"\n-\s", '\n\n• ', text)
     text = re.sub(r"\-", '\-', text)
     text = re.sub(r"!", '\!', text)
     return text

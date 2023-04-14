@@ -52,7 +52,7 @@ print(escape(text))
 *bold*
 ```
 \# comment
-print(qwer) \# ferfe
+print\(qwer\) \# ferfe
 ni1
 ```
 ▎*bn*
@@ -72,17 +72,17 @@ ni1
 • item 3 \~
 
 ```python
-print("1\.1")\_
+print\("1\.1"\)\_
 ```
 
 And simple text with \+ some \- *symbols*\.
 
 
 ```
-print("Hello, World\!")
+print\("Hello, World\!"\)
 ```
 
-Cxy \= abs (Pxy)\*\*2/ (Pxx\*Pyy)
+Cxy \= abs \(Pxy\)\*\*2/ \(Pxx\*Pyy\)
 
 '''
 

@@ -11,7 +11,7 @@ def escapeshape(text):
         end = match.end(1)
         if match.group(1) != None:
             poslist += [start, end]
-            strlist.append('*' + text[start:end].split()[1] + '*')
+            strlist.append('▎*' + text[start:end].split()[1] + '*')
     poslist.append(len(text))
     for i in range(0, len(poslist), 2):
         j, k = poslist[i:i+2]
@@ -28,8 +28,10 @@ def escape(text):
     # _ * [ ] ( ) ~ ` > # + - = | { } . !
     # must be escaped with the preceding character '\'.
     text = re.sub(r"_", '\_', text)
-    text = re.sub(r"\n\*", '\n• ', text)
+    text = re.sub(r"\*{2}(.*?)\*{2}", '@@@\\1@@@', text)
+    text = re.sub(r"\n\*\s", '\n• ', text)
     text = re.sub(r"\*", '\*', text)
+    text = re.sub(r"\@{3}(.*?)\@{3}", '*\\1*', text)
     # text = re.sub(r"\[", '\[', text)
     # text = re.sub(r"\]", '\]', text)
     # text = re.sub(r"\(", '\(', text)
@@ -39,16 +41,17 @@ def escape(text):
     text = escapeshape(text)
     text = re.sub(r"#", '\#', text)
     text = re.sub(r"\+", '\+', text)
-    text = re.sub(r"\n-", '\n• ', text)
+    text = re.sub(r"\n-\s", '\n• ', text)
     text = re.sub(r"\-", '\-', text)
     text = re.sub(r"!", '\!', text)
     return text
 
 text = '''
-# 标题
+# title
 
+**bold**
 ```
-# 注释
+# comment
 print(qwer) # ferfe
 ni1
 ```
@@ -69,15 +72,12 @@ ni1
 print("1.1")_
 ```
 
-And simple text with + some - symbols.
+And simple text with + some - **symbols**.
 
-当然可以！以下是Python的经典“Hello, World!”程序：
 
 ```
 print("Hello, World!")
 ```
-
-你可以将这段代码复制并粘贴到Python解释器中，或者将其保存到一个.py文件中并在命令行中运行它。无论哪种方式，它都应该输出“Hello, World!”这个简单的欢迎消息。
 '''
 
 if __name__ == '__main__':

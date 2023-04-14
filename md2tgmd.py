@@ -21,7 +21,6 @@ def escapeshape(text):
     else:
         originstr.append('')
     new_list = [item for pair in zip(originstr, strlist) for item in pair]
-    # print(''.join(new_list))
     return ''.join(new_list)
 
 def escape(text):
@@ -81,11 +80,6 @@ print("Hello, World!")
 你可以将这段代码复制并粘贴到Python解释器中，或者将其保存到一个.py文件中并在命令行中运行它。无论哪种方式，它都应该输出“Hello, World!”这个简单的欢迎消息。
 '''
 
-message = (
-    "我是人见人爱的 ChatGPT~\n\n"
-    "欢迎访问 https://github.com/yym68686/ChatGPT-Telegram-Bot 查看源码\n\n"
-    "有 bug 可以联系 @yym68686"
-)
 if __name__ == '__main__':
     text = escape(text)
     print(text)

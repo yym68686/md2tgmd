@@ -39,6 +39,8 @@ And simple text with + some - **symbols**.
 ```
 print("Hello, World!")
 ```
+
+Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 '''
 
 print(escape(text))
@@ -79,6 +81,8 @@ And simple text with \+ some \- *symbols*\.
 ```
 print("Hello, World\!")
 ```
+
+Cxy \= abs (Pxy)\*\*2/ (Pxx\*Pyy)
 
 '''
 

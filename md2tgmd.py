@@ -37,12 +37,17 @@ def escape(text):
     # text = re.sub(r"\(", '\(', text)
     # text = re.sub(r"\)", '\)', text)
     text = re.sub(r"~", '\~', text)
-    text = re.sub(r"\.", '\.', text)
+    text = re.sub(r">", '\>', text)
     text = escapeshape(text)
     text = re.sub(r"#", '\#', text)
     text = re.sub(r"\+", '\+', text)
     text = re.sub(r"\n-\s", '\n\n• ', text)
     text = re.sub(r"\-", '\-', text)
+    text = re.sub(r"=", '\=', text)
+    text = re.sub(r"\|", '\|', text)
+    text = re.sub(r"{", '\{', text)
+    text = re.sub(r"}", '\}', text)
+    text = re.sub(r"\.", '\.', text)
     text = re.sub(r"!", '\!', text)
     return text
 
@@ -78,6 +83,8 @@ And simple text with + some - **symbols**.
 ```
 print("Hello, World!")
 ```
+
+Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 '''
 
 if __name__ == '__main__':

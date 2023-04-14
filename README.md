@@ -1,6 +1,6 @@
 # md2tgmd
 
-md2tgmd is a Markdown to Telegram-specific-markdown converter.
+md2tgmd is a Markdown to [Telegram-specific-markdown](https://core.telegram.org/bots/api#formatting-options) converter.
 
 ## Usage
 

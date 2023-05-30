@@ -27,7 +27,7 @@ def escape(text):
     # In all other places characters
     # _ * [ ] ( ) ~ ` > # + - = | { } . !
     # must be escaped with the preceding character '\'.
-    text = re.sub(r"\\n", r"\\\\n", text)
+    text = re.sub(r"\\", r"\\\\", text)
     text = re.sub(r"_", '\_', text)
     text = re.sub(r"\*{2}(.*?)\*{2}", '@@@\\1@@@', text)
     text = re.sub(r"\n\*\s", '\n\n• ', text)

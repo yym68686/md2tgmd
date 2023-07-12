@@ -24,23 +24,42 @@ ni1
 ## Subheader
 
 [1.0.0](http://version.com)
+![1.0.0](http://version.com)
 
 - item 1 -
-* item 2
+    - item 1 -
+    - item 1 -
+* item 2 #
 * item 3 ~
 
+1. item 1
+2. item 2
+
+sudo apt install mesa-utils # 安装
+
 ```python
-print("1.1")_
+
+# comment
+print("1.1\n")_
+\subsubsection{1.1}
 ```
+\subsubsection{1.1}
 
-And simple text with + some - **symbols**.
+And simple text `with-ten`  `with+ten` + some - **symbols**. # `with-ten`里面的`-`不会被转义
 
 
 ```
-print("Hello, World!")
+print("Hello, World!") -
 ```
 
 Cxy = abs (Pxy)**2/ (Pxx*Pyy)
+
+`a`a-b-c`n`
+
+`-a----++++`++a-b-c`-n-`
+`[^``]*`a``b-c``d``
+# pattern = r"`[^`]*`-([^`-]*)``
+w`-a----`ccccc`-n-`bbbb``a
 '''
 
 print(escape(text))
@@ -63,27 +82,49 @@ ni1
 ▎*Subheader*
 
 [1\.0\.0](http://version\.com)
+[1\.0\.0](http://version\.com)
 
 
 • item 1 \-
 
-• item 2
+    • item 1 \-
+
+    • item 1 \-
+
+• item 2 \#
 
 • item 3 \~
 
+
+1\. item 1
+
+2\. item 2
+
+sudo apt install mesa\-utils \# 安装
+
 ```python
-print\("1\.1"\)\_
+
+\# comment
+print\("1\.1\\n"\)\_
+\\subsubsection\{1\.1\}
 ```
+\\subsubsection\{1\.1\}
 
-And simple text with \+ some \- *symbols*\.
+And simple text `with-ten`  `with+ten` \+ some \- *symbols*\. \# `with-ten`里面的`-`不会被转义
 
 
 ```
-print\("Hello, World\!"\)
+print\("Hello, World\!"\) -
 ```
 
 Cxy \= abs \(Pxy\)\*\*2/ \(Pxx\*Pyy\)
 
+`a`a\-b\-c`n`
+
+`-a----++++`\+\+a\-b\-c`-n-`
+`\[^\`\`\]\*`a\`\`b\-c\`\`d\`\`
+▎*pattern*
+w`-a----`ccccc`-n-`bbbb\`\`a
 '''
 
 ~~~

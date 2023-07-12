@@ -131,7 +131,7 @@ Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 `-a----++++`++a-b-c`-n-`
 `[^``]*`a``b-c``d``
 # pattern = r"`[^`]*`-([^`-]*)``
-w`-a----`ccccc`-n-`bbbb``a。
+w`-a----`ccccc`-n-`bbbb``a
 '''
 
 if __name__ == '__main__':

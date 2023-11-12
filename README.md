@@ -132,3 +132,8 @@ w`-a----`ccccc`-n-`bbbb\`\`a
 ## Reference
 
 https://github.com/skoropadas/telegramify-markdown
+
+
+## License
+
+This project is licensed under GPLv3, which means you are free to copy, distribute, and modify the software, as long as all modifications and derivative works are also released under the same license.

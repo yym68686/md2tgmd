@@ -1,8 +1,0 @@
-[project]
-name = "md2tgmd"
-version = "0.1.0"
-description = "md2tgmd is a Markdown to Telegram-specific-markdown converter."
-
-[build-system]
-requires = ["setuptools>=40.8.0", "wheel"]
-build-backend = "setuptools.build_meta"

@@ -4,6 +4,12 @@ md2tgmd is a Markdown to [Telegram-specific-markdown](https://core.telegram.org/
 
 ## Usage
 
+pip install
+
+```bash
+pip install md2tgmd
+```
+
 ~~~python
 from md2tgmd import escape
 

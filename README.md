@@ -2,13 +2,13 @@
 
 md2tgmd is a Markdown to [Telegram-specific-markdown](https://core.telegram.org/bots/api#formatting-options) converter.
 
-## Usage
-
-pip install
+## Install
 
 ```bash
 pip install md2tgmd
 ```
+
+## Usage
 
 ~~~python
 from md2tgmd import escape

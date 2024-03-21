@@ -29,7 +29,7 @@ def replace_all(text, pattern, function):
     return ''.join(new_list)
 
 def escapeshape(text):
-    return '▎*' + text.split()[1] + '*'
+    return '▎*' + " ".join(text.split()[1:]) + '*'
 
 def escapeminus(text):
     return '\\' + text
@@ -89,6 +89,8 @@ def escape(text, flag=0):
 
 text = r'''
 # title
+
+### `probs.scatter_(1, ind`
 
 **bold**
 ```

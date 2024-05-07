@@ -77,6 +77,7 @@ def escape(text, flag=0):
     text = re.sub(r"\\\)", '@<--@', text)
     if flag:
         text = re.sub(r"\\\\", '@@@', text)
+    text = re.sub(r"\\`", '@<@', text)
     text = re.sub(r"\\", r"\\\\", text)
     if flag:
         text = re.sub(r"\@{3}", r"\\\\", text)
@@ -107,6 +108,7 @@ def escape(text, flag=0):
     # 把 code block 里面的`替换掉
     text = replace_all(text, r"\@\@\@[\s\d\D]+?\@\@\@|(`)", escapebackquoteincode)
     text = re.sub(r"`", '\`', text)
+    text = re.sub(r"\@\<\@", '\`', text)
     text = re.sub(r"\@\-\>\@", '`', text)
 
 
@@ -192,6 +194,8 @@ w`-a----`ccccc`-n-`bbbb``a
 1. 打开 VSCode 的终端：选择菜单中的 `视图` > `终端`，或者使用快捷键 `Ctrl+``（反引号）。
 
 python line.strip().startwith("```")怎么写？
+
+（\`）
 '''
 
 if __name__ == '__main__':

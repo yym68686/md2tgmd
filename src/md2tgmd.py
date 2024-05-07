@@ -46,6 +46,27 @@ def escapeplus(text):
 def escape_all_backquote(text):
     return '\\' + text
 
+def find_lines_with_char(s, char, min_count):
+    """
+    返回字符串中每行包含特定字符至少min_count次的行的索引列表。
+
+    参数:
+    s (str): 要处理的字符串。
+    char (str): 要计数的字符。
+    min_count (int): 最小出现次数。
+
+    返回:
+    list: 满足条件的行的索引列表。
+    """
+    lines = s.split('\n')  # 按行拆分字符串
+
+    for index, line in enumerate(lines):
+        if line.count(char) >= min_count or re.sub(r"```", '', line).count(char) % 2 != 0:
+            # lines[index] = re.sub(r"`", '\`', line)
+            lines[index] = replace_all(lines[index], r"\\`|(`)", escape_all_backquote)
+
+    return "\n".join(lines)
+
 def escape(text, flag=0):
     # In all other places characters
     # _ * [ ] ( ) ~ ` > # + - = | { } . !
@@ -88,6 +109,12 @@ def escape(text, flag=0):
     text = re.sub(r"`", '\`', text)
     text = re.sub(r"\@\-\>\@", '`', text)
 
+
+    # text = replace_all(text, r"`.*?`{1,2}|(`)", escapebackquoteincode)
+    # text = re.sub(r"`", '\`', text)
+    # text = re.sub(r"\@\-\>\@", '`', text)
+    # print(text)
+
     text = replace_all(text, r"(``)", escapebackquote)
     text = re.sub(r"\@{3}([\D\d\s]+?)\@{3}", '```\\1```', text)
     text = re.sub(r"=", '\=', text)
@@ -96,6 +123,7 @@ def escape(text, flag=0):
     text = re.sub(r"}", '\}', text)
     text = re.sub(r"\.", '\.', text)
     text = re.sub(r"!", '\!', text)
+    text = find_lines_with_char(text, '`', 5)
     return text
 
 text = r'''
@@ -158,8 +186,10 @@ Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 
 `-a----++++`++a-b-c`-n-`
 `[^``]*`a``b-c``d``
-# pattern = r"`[^`]*`-([^`-]*)``
+# pattern = r"`[^`]*`-([^`-]*)"``
 w`-a----`ccccc`-n-`bbbb``a
+
+1. 打开 VSCode 的终端：选择菜单中的 `视图` > `终端`，或者使用快捷键 `Ctrl+``（反引号）。
 '''
 
 if __name__ == '__main__':

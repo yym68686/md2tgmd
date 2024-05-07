@@ -83,10 +83,10 @@ def escape(text, flag=0):
     text = re.sub(r"\n{1,2}(\s*\d{1,2}\.\s)", '\n\n\\1', text)
     text = replace_all(text, r"(-)|\n[\s]*-\s|```[\D\d\s]+?```|`[\D\d\s]*?`", escapeminus)
     text = re.sub(r"```([\D\d\s]+?)```", '@@@\\1@@@', text)
-    # # 把 code block 里面的`替换掉
-    # text = replace_all(text, r"\@\@\@[\s\d\D]+?\@\@\@|(`)", escapebackquoteincode)
-    # text = re.sub(r"`", '\`', text)
-    # text = re.sub(r"\@\-\>\@", '`', text)
+    # 把 code block 里面的`替换掉
+    text = replace_all(text, r"\@\@\@[\s\d\D]+?\@\@\@|(`)", escapebackquoteincode)
+    text = re.sub(r"`", '\`', text)
+    text = re.sub(r"\@\-\>\@", '`', text)
 
     text = replace_all(text, r"(``)", escapebackquote)
     text = re.sub(r"\@{3}([\D\d\s]+?)\@{3}", '```\\1```', text)

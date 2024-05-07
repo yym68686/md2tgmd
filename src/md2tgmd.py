@@ -61,7 +61,7 @@ def find_lines_with_char(s, char, min_count):
     lines = s.split('\n')  # 按行拆分字符串
 
     for index, line in enumerate(lines):
-        if line.count(char) >= min_count or re.sub(r"```", '', line).count(char) % 2 != 0:
+        if line.count(char) >= min_count or re.sub(r"```", '', line).count(char) % 2 != 0 or (not line.strip().startswith("```") and line.count(char) % 2 != 0):
             # lines[index] = re.sub(r"`", '\`', line)
             lines[index] = replace_all(lines[index], r"\\`|(`)", escape_all_backquote)
 
@@ -190,6 +190,8 @@ Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 w`-a----`ccccc`-n-`bbbb``a
 
 1. 打开 VSCode 的终端：选择菜单中的 `视图` > `终端`，或者使用快捷键 `Ctrl+``（反引号）。
+
+python line.strip().startwith("```")怎么写？
 '''
 
 if __name__ == '__main__':

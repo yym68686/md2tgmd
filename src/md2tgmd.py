@@ -61,7 +61,7 @@ def find_lines_with_char(s, char, min_count):
     lines = s.split('\n')  # 按行拆分字符串
 
     for index, line in enumerate(lines):
-        if line.count(char) >= min_count or re.sub(r"```", '', line).count(char) % 2 != 0 or (not line.strip().startswith("```") and line.count(char) % 2 != 0):
+        if re.sub(r"```", '', line).count(char) % 2 != 0 or (not line.strip().startswith("```") and line.count(char) % 2 != 0):
             # lines[index] = re.sub(r"`", '\`', line)
             lines[index] = replace_all(lines[index], r"\\`|(`)", escape_all_backquote)
 
@@ -195,7 +195,10 @@ w`-a----`ccccc`-n-`bbbb``a
 
 python line.strip().startwith("```")怎么写？
 
+`视图` > `终端`
+
 （\`）
+- `Path.open()` 方法打开了 `README.md` 文件，并指定了编码为 `"utf-8"`。
 '''
 
 if __name__ == '__main__':

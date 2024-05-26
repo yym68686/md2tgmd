@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="md2tgmd",
-    version="0.1.9",
+    version="0.2.0",
     description="md2tgmd is a Markdown to Telegram-specific-markdown converter.",
     long_description=Path.open(Path("README.md"), encoding="utf-8").read(),
     long_description_content_type="text/markdown",

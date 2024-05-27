@@ -120,7 +120,6 @@ def escape(text, flag=0):
     text = re.sub(r"\@\<\@", '\`', text)
     text = re.sub(r"\@\-\>\@", '`', text)
 
-
     # text = replace_all(text, r"`.*?`{1,2}|(`)", escapebackquoteincode)
     # text = re.sub(r"`", '\`', text)
     # text = re.sub(r"\@\-\>\@", '`', text)

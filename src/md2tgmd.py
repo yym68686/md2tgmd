@@ -35,7 +35,7 @@ def escapeminus(text):
     return '\\' + text
 
 def escapeminus2(text):
-    return r'@->@'
+    return r'@+>@'
 
 def escapebackquote(text):
     return r'\`\`'
@@ -107,11 +107,11 @@ def escape(text, flag=0):
     text = re.sub(r"\n{1,2}(\s*\d{1,2}\.\s)", '\n\n\\1', text)
     # # 把 code block 以外的 - 替换掉
     text = replace_all(text, r"```[\D\d\s]+?```|(-)", escapeminus2)
-    text = re.sub(r"-", '@<-@', text)
-    text = re.sub(r"\@\-\>\@", '-', text)
+    text = re.sub(r"-", '@<+@', text)
+    text = re.sub(r"\@\+\>\@", '-', text)
 
     text = re.sub(r"\n{1,2}(\s*)-\s", '\n\n\\1• ', text)
-    text = re.sub(r"\@\<\-\@", '\-', text)
+    text = re.sub(r"\@\<\+\@", '\-', text)
     text = replace_all(text, r"(-)|\n[\s]*-\s|```[\D\d\s]+?```|`[\D\d\s]*?`", escapeminus)
     text = re.sub(r"```([\D\d\s]+?)```", '@@@\\1@@@', text)
     # 把 code block 里面的`替换掉

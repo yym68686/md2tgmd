@@ -29,7 +29,7 @@ def replace_all(text, pattern, function):
     return ''.join(new_list)
 
 def escapeshape(text):
-    return '▎*' + " ".join(text.split()[1:]) + '*'
+    return '▎*' + " ".join(text.split()[1:]) + '*\n\n'
 
 def escapeminus(text):
     return '\\' + text
@@ -101,7 +101,7 @@ def escape(text, flag=0):
     text = re.sub(r"\@{3}(.*?)\@{3}\^{3}(.*?)\^{3}", '[\\1](\\2)', text)
     text = re.sub(r"~", '\~', text)
     text = re.sub(r">", '\>', text)
-    text = replace_all(text, r"(^#+\s.+?$)|```[\D\d\s]+?```", escapeshape)
+    text = replace_all(text, r"(^#+\s.+?\n+)|```[\D\d\s]+?```", escapeshape)
     text = re.sub(r"#", '\#', text)
     text = replace_all(text, r"(\+)|\n[\s]*-\s|```[\D\d\s]+?```|`[\D\d\s]*?`", escapeplus)
     text = re.sub(r"\n{1,2}(\s*\d{1,2}\.\s)", '\n\n\\1', text)
@@ -148,6 +148,7 @@ print(qwer) # ferfe
 ni1
 ```
 # bn
+
 
 # b
 

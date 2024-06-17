@@ -49,6 +49,10 @@ def escapeplus(text):
 def escape_all_backquote(text):
     return '\\' + text
 
+def dedent_space(text):
+    import textwrap
+    return textwrap.dedent(text)
+
 def find_lines_with_char(s, char, min_count):
     """
     返回字符串中每行包含特定字符至少min_count次的行的索引列表。
@@ -134,6 +138,7 @@ def escape(text, flag=0):
     text = re.sub(r"\.", '\.', text)
     text = re.sub(r"!", '\!', text)
     text = find_lines_with_char(text, '`', 5)
+    text = replace_all(text, r"(\x20*```[\D\d\s]+?```)", dedent_space)
     return text
 
 text = r'''
@@ -184,12 +189,12 @@ print("1.1\n")_
 And simple text `with-ten`  `with+ten` + some - **symbols**. # `with-ten`里面的`-`不会被转义
 
 
-```
-print("Hello, World!") -
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-```
+    ```
+    print("Hello, World!") -
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+    ```
 
 Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 

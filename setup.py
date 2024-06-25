@@ -10,5 +10,4 @@ setup(
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=["md2tgmd"],
-    install_requires=Path.open(Path("requirements.txt"), encoding="utf-8").read().splitlines(),
 )

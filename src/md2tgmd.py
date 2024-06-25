@@ -51,7 +51,7 @@ def escape_all_backquote(text):
 
 def dedent_space(text):
     import textwrap
-    return textwrap.dedent(text)
+    return "\n\n" + textwrap.dedent(text).strip() + "\n\n"
 
 def find_lines_with_char(s, char, min_count):
     """
@@ -138,7 +138,7 @@ def escape(text, flag=0):
     text = re.sub(r"\.", '\.', text)
     text = re.sub(r"!", '\!', text)
     text = find_lines_with_char(text, '`', 5)
-    text = replace_all(text, r"(\x20*```[\D\d\s]+?```)", dedent_space)
+    text = replace_all(text, r"(\n+\x20*```[\D\d\s]+?```\n+)", dedent_space)
     return text
 
 text = r'''
@@ -173,10 +173,6 @@ ni1
 2. item 2
 
 1. item 1
-2. item 2
-
-sudo apt install mesa-utils # 安装
-
 ```python
 
 # comment
@@ -184,6 +180,10 @@ print("1.1\n")_
 \subsubsection{1.1}
 - item 1 -
 ```
+2. item 2
+
+sudo apt install mesa-utils # 安装
+
 \subsubsection{1.1}
 
 And simple text `with-ten`  `with+ten` + some - **symbols**. # `with-ten`里面的`-`不会被转义

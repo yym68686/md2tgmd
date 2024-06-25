@@ -9,6 +9,9 @@ setup(
     long_description=Path.open(Path("README.md"), encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/yym68686/md2tgmd",
+    project_urls={
+        'Home-page': 'https://github.com/yym68686/md2tgmd',
+    },
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=["md2tgmd"]

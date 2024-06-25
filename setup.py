@@ -1,18 +1,14 @@
 from pathlib import Path
-
 from setuptools import setup, find_packages
 
 setup(
     name="md2tgmd",
     version="0.2.4",
     description="md2tgmd is a Markdown to Telegram-specific-markdown converter.",
-    long_description=Path.open(Path("README.md"), encoding="utf-8").read(),
+    long_description=Path("README.md").open(encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yym68686/md2tgmd",
-    project_urls={
-        'Home-page': 'https://github.com/yym68686/md2tgmd',
-    },
     packages=find_packages("src"),
     package_dir={"": "src"},
-    py_modules=["md2tgmd"]
+    py_modules=["md2tgmd"],
+    install_requires=Path.open(Path("requirements.txt"), encoding="utf-8").read().splitlines(),
 )

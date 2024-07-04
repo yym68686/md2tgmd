@@ -53,6 +53,47 @@ def dedent_space(text):
     import textwrap
     return "\n\n" + textwrap.dedent(text).strip() + "\n\n"
 
+def split_code(text):
+    split_list = []
+    if len(text) > 3500:
+        split_str_list = text.split('\n\n')
+
+        conversation_len = len(split_str_list)
+        message_index = 1
+        while message_index < conversation_len:
+            if split_str_list[message_index].startswith('    '):
+                split_str_list[message_index - 1] += split_str_list[message_index]
+                split_str_list.pop(message_index)
+                conversation_len = conversation_len - 1
+            else:
+                message_index = message_index + 1
+
+        split_index = 0
+        for index, _ in enumerate(split_str_list):
+            if len("".join(split_str_list[:index])) < len(text) // 2:
+                split_index += 1
+                continue
+            else:
+                break
+        str1 = '\n\n'.join(split_str_list[:split_index])
+        if not str1.strip().endswith("```"):
+            str1 = str1 + "\n```"
+        split_list.append(str1)
+        code_type = text.split('\n')[0]
+        str2 = '\n\n'.join(split_str_list[split_index:])
+        str2 = code_type + "\n" + str2
+        if not str2.strip().endswith("```"):
+            str2 = str2 + "\n```"
+        split_list.append(str2)
+    else:
+        split_list.append(text)
+
+    if len(split_list) > 1:
+        split_list = "\n@|@|@|@\n\n".join(split_list)
+    else:
+        split_list = split_list[0]
+    return split_list
+
 def find_lines_with_char(s, char, min_count):
     """
     返回字符串中每行包含特定字符至少min_count次的行的索引列表。

@@ -55,7 +55,7 @@ def dedent_space(text):
 
 def split_code(text):
     split_list = []
-    if len(text) > 3500:
+    if len(text) > 2500:
         split_str_list = text.split('\n\n')
 
         conversation_len = len(split_str_list)

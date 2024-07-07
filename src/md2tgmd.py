@@ -62,7 +62,7 @@ def split_code(text):
         message_index = 1
         while message_index < conversation_len:
             if split_str_list[message_index].startswith('    '):
-                split_str_list[message_index - 1] += split_str_list[message_index]
+                split_str_list[message_index - 1] += "\n\n" + split_str_list[message_index]
                 split_str_list.pop(message_index)
                 conversation_len = conversation_len - 1
             else:

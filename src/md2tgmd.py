@@ -129,7 +129,11 @@ def escape(text, flag=0):
     text = re.sub(r"\\", r"\\\\", text)
     if flag:
         text = re.sub(r"\@{3}", r"\\\\", text)
+    # _italic_
+    text = re.sub(r"\_{1}(.*?)\_{1}", '@@@\\1@@@', text)
     text = re.sub(r"_", '\_', text)
+    text = re.sub(r"\@{3}(.*?)\@{3}", '_\\1_', text)
+
     text = re.sub(r"\*{2}(.*?)\*{2}", '@@@\\1@@@', text)
     text = re.sub(r"\n{1,2}\*\s", '\n\n• ', text)
     text = re.sub(r"\*", '\*', text)
@@ -144,7 +148,12 @@ def escape(text, flag=0):
     text = re.sub(r"\@\-\-\>\@", '\(', text)
     text = re.sub(r"\@\<\-\-\@", '\)', text)
     text = re.sub(r"\@{3}(.*?)\@{3}\^{3}(.*?)\^{3}", '[\\1](\\2)', text)
+
+    # ~strikethrough~
+    text = re.sub(r"\~{2}(.*?)\~{2}", '@@@\\1@@@', text)
     text = re.sub(r"~", '\~', text)
+    text = re.sub(r"\@{3}(.*?)\@{3}", '~\\1~', text)
+
     text = re.sub(r">", '\>', text)
     text = replace_all(text, r"(^#+\s.+?\n+)|```[\D\d\s]+?```", escapeshape)
     text = re.sub(r"#", '\#', text)

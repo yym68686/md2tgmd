@@ -173,6 +173,7 @@ def escape(text, flag=0):
     text = re.sub(r"`", '\`', text)
     text = re.sub(r"\@\<\@", '\`', text)
     text = re.sub(r"\@\-\>\@", '`', text)
+    text = re.sub(r"\s`\\`\s", ' `\\\\\` ', text)
 
     # text = replace_all(text, r"`.*?`{1,2}|(`)", escapebackquoteincode)
     # text = re.sub(r"`", '\`', text)
@@ -264,6 +265,11 @@ python line.strip().startwith("```")怎么写？
 
 （\`）
 - `Path.open()` 方法打开了 `README.md` 文件，并指定了编码为 `"utf-8"`。
+
+为了匹配实际的点号，需要使用反斜杠 `\` 进行转义。
+
+3. `(`
+
 '''
 
 if __name__ == '__main__':

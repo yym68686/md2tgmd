@@ -115,7 +115,7 @@ def find_lines_with_char(s, char, min_count):
 
     return "\n".join(lines)
 
-def escape(text, flag=0):
+def escape(text, flag=0, italic=True):
     # In all other places characters
     # _ * [ ] ( ) ~ ` > # + - = | { } . !
     # must be escaped with the preceding character '\'.
@@ -130,9 +130,12 @@ def escape(text, flag=0):
     if flag:
         text = re.sub(r"\@{3}", r"\\\\", text)
     # _italic_
-    text = re.sub(r"\_{1}(.*?)\_{1}", '@@@\\1@@@', text)
-    text = re.sub(r"_", '\_', text)
-    text = re.sub(r"\@{3}(.*?)\@{3}", '_\\1_', text)
+    if italic:
+        text = re.sub(r"\_{1}(.*?)\_{1}", '@@@\\1@@@', text)
+        text = re.sub(r"_", '\_', text)
+        text = re.sub(r"\@{3}(.*?)\@{3}", '_\\1_', text)
+    else:
+        text = re.sub(r"_", '\_', text)
 
     text = re.sub(r"\*{2}(.*?)\*{2}", '@@@\\1@@@', text)
     text = re.sub(r"\n{1,2}\*\s", '\n\n• ', text)

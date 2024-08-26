@@ -278,5 +278,171 @@ python line.strip().startwith("```")怎么写？
 if __name__ == '__main__':
     import os
     os.system('clear')
-    text = escape(text)
-    print(text)
+    # text = escape(text)
+    # print(text)
+    tmpresult = '''
+`🤖️ gpt-4o`
+
+To display the error message on the same page without redirecting, we can modify the form submission to use AJAX (Asynchronous JavaScript and XML) with `fetch`. This way, we can handle the response directly on the client side and update the DOM accordingly.
+
+### Backend (TypeScript with Express.js)
+Ensure your backend route handles the login logic and returns JSON responses for errors and success:
+
+```typescript
+import { Request, Response } from 'express';
+
+export async function workerLogin(req: Request, res: Response) {
+  try {
+      const { email, password } = req.body;
+      console.log(`Request Body: ${JSON.stringify(req.body)}`);
+
+      if (!email || !password) {
+          return res.status(400).json({ message: 'Email and password must be provided' });
+      }
+
+      const officeWorker = await getOfficeWorkerByEmail(email);
+
+      console.log('Found office worker:', officeWorker);
+
+      if (officeWorker && officeWorker.password === password) {
+          const workingHours = await getWorkingHoursByWorkerId(officeWorker._id);
+          console.log('Working hours:', workingHours);
+
+          const clientIds = [...new Set(workingHours.map(entry => entry.client_id))];
+          console.log('Client IDs:', clientIds);
+
+          const clients = await getClients({ _id: { $in: clientIds } });
+          console.log('Clients:', clients);
+
+          res.status(200).json({ redirectUrl: '/pages/manageClients', officeWorker, clients, clientsCount: clients.length });
+      } else {
+          res.status(400).json({ msg: 'Invalid Email or password' });
+      }
+  } catch (error) {
+      console.error('Error during worker login process:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      res.status(500).json({ error: errorMessage });
+  }
+}
+```
+
+### Frontend (HTML + JavaScript)
+Modify your HTML form to handle the submission with JavaScript:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/workerLogin.css">
+    <title>Worker Login</title>
+</head>
+<body>
+    <div class="container">
+        <h1>נתיג</h1>
+        <h1>:התחברות כעובד משרד</h1>
+        <form id="workerLoginForm">
+            מייל
+            <input type="email" name="email" placeholder="email" required>
+            סיסמה
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit">התחברות</button>
+        </form>
+        <div id="error-message" style="color: red; display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('workerLoginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/workerLogin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.status === 400) {
+                // Show error message on the same page
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = result.msg;
+            } else if (response.status === 200) {
+                // Handle successful login (e.g., redirect to another page)
+                window.location.href = result.redirectUrl;
+            } else {
+                // Handle other errors
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = result.error || 'An unknown error occurred';
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+### Explanation:
+1. **Backend:** The `workerLogin` function now returns JSON responses for both success and error cases. On successful login, it includes a `redirectUrl` in the response.
+2. **Frontend:**
+   - The form submission is intercepted by JavaScript using `event.preventDefault()`.
+   - The form data is collected and sent to the server using `fetch`.
+   - If the response status is `400`, the error message is displayed in a `<div>` on the same page.
+   - If the response status is `200`, the user is redirected to the URL provided in the response.
+   - Other errors are also handled and displayed.
+
+This approach ensures that users receive immediate feedback on the same page without needing to reload or navigate away.
+'''
+    replace_text = replace_all(tmpresult, r"(```[\D\d\s]+?```)", split_code)
+    if replace_text.strip().endswith("```"):
+        replace_text = replace_text.strip()[:4]
+    split_messages_new = []
+    split_messages = replace_text.split("```")
+
+    for index, item in enumerate(split_messages):
+        if index % 2 == 1:
+            item = "```" + item
+            if index != len(split_messages) - 1:
+                item = item + "```"
+            split_messages_new.append(item)
+        if index % 2 == 0:
+            item_split_new = []
+            item_split = item.split("\n\n")
+            for sub_index, sub_item in enumerate(item_split):
+                if sub_index % 2 == 1:
+                    sub_item = "\n\n" + sub_item
+                    if sub_index != len(item_split) - 1:
+                        sub_item = sub_item + "\n\n"
+                    item_split_new.append(sub_item)
+                if sub_index % 2 == 0:
+                    item_split_new.append(sub_item)
+            split_messages_new.extend(item_split_new)
+    split_index = 0
+    for index, _ in enumerate(split_messages_new):
+        if len("".join(split_messages_new[:index])) < 3500:
+            split_index += 1
+            continue
+        else:
+            break
+    send_split_message = ''.join(split_messages_new[:split_index])
+
+    tmp = ''.join(split_messages_new[split_index:])
+    if tmp.strip().endswith("```"):
+        result = tmp[:-4]
+        matches = re.findall(r"(```.*?\n)", send_split_message)
+        if not result.strip().startswith("```") and len(matches) >= 1:
+            result = matches[-1] + result
+    else:
+        result = tmp
+    print(send_split_message)
+    print("================================")
+    print(result)
+    print(matches)

@@ -772,6 +772,8 @@ if __name__ == "__main__":
     print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert("\Delta t_f = 3.85")
     print(result)  # 预期输出: α + β = γ
+    result = latex2unicode.convert("\Delta v是速度的变化量")
+    print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert(r"a = \frac{27.8}{3.85} \approx 7.22")
     print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert(r"a = \frac{27.8 \, \text{m/s} - 0 \, \text{m/s}}{3.85 \, \text{s}}")

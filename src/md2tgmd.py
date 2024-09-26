@@ -121,11 +121,10 @@ def find_lines_with_char(s, char, min_count):
     return "\n".join(lines)
 
 def latex2unicode(text):
-    # print(text)
-    text = text.lstrip("\\[")
-    text = text.rstrip("\\]")
-    text = text.lstrip("\\(")
-    text = text.rstrip("\\)")
+    text = re.sub(r"\\\[", "", text)
+    text = re.sub(r"\\\]", "", text)
+    text = re.sub(r"\\\(", "", text)
+    text = re.sub(r"\\\)", "", text)
     result = l2u.convert(text)
     # result = l2u.convert(rf"{text}")
     return result

@@ -1,4 +1,7 @@
 import re
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from latex2unicode import LaTeX2Unicode
 l2u = LaTeX2Unicode()
 
@@ -118,7 +121,7 @@ def find_lines_with_char(s, char, min_count):
     return "\n".join(lines)
 
 def latex2unicode(text):
-    print(text)
+    # print(text)
     text = text.lstrip("\\[")
     text = text.rstrip("\\]")
     text = text.lstrip("\\(")

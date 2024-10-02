@@ -1,0 +1,109 @@
+Ya, Anda bisa menggunakan VPS untuk menjalankan repositori dari GitHub dan mengatur agar file baru yang ditambahkan secara otomatis diunggah ke channel Telegram. Untuk mencapai ini, Anda bisa menggunakan beberapa teknik, termasuk pemantauan perubahan file dan pengaturan cron job atau skrip yang berjalan terus-menerus.
+
+Berikut adalah langkah-langkah detail untuk mengatur ini:
+
+### 1. Menyiapkan VPS
+
+1. **Akses VPS:**
+   - Login ke VPS Anda menggunakan SSH.
+
+2. **Instal Dependensi:**
+   - Pastikan Python dan `git` terinstal di VPS Anda.
+     ```bash
+     sudo apt update
+     sudo apt install python3 python3-pip git
+     ```
+
+3. **Clone Repositori GitHub:**
+   - Clone repositori `dorks-eye` ke VPS Anda.
+     ```bash
+     git clone https://github.com/BullsEye0/dorks-eye.git
+     cd dorks-eye
+     ```
+
+### 2. Mengatur Bot Telegram
+
+1. **Buat Bot Telegram:**
+   - Gunakan BotFather untuk membuat bot baru dan catat token API-nya.
+
+2. **Dapatkan ID Channel:**
+   - Tambahkan bot ke channel Anda sebagai admin dan dapatkan ID channel.
+
+### 3. Membuat Script untuk Mengirim File ke Telegram
+
+1. **Instal Pustaka Requests:**
+   - Instal pustaka `requests` untuk berinteraksi dengan API Telegram.
+     ```bash
+     pip3 install requests
+     ```
+
+2. **Buat Script Python:**
+   - Buat file Python baru, misalnya `upload_to_telegram.py`.
+   - Salin dan tempel kode berikut ke dalam file tersebut:
+
+     ```python
+     import os
+     import requests
+
+     # Token bot dan ID channel
+     TOKEN = 'YOUR_BOT_TOKEN'
+     CHANNEL_ID = '@your_channel_id'
+
+     # Fungsi untuk mengirim pesan
+     def send_message(text):
+         url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+         payload = {
+             'chat_id': CHANNEL_ID,
+             'text': text,
+             'parse_mode': 'HTML'
+         }
+         response = requests.post(url, data=payload)
+         return response.json()
+
+     # Fungsi untuk memeriksa file baru dan mengirimnya ke Telegram
+     def check_and_send_new_files(repo_path):
+         # Dapatkan daftar file di repositori
+         files = os.listdir(repo_path)
+         for file_name in files:
+             file_path = os.path.join(repo_path, file_name)
+             if os.path.isfile(file_path):
+                 with open(file_path, 'r') as file:
+                     content = file.read()
+                     send_message(content)
+
+     # Path ke repositori yang telah di-clone
+     repo_path = '/path/to/dorks-eye'
+
+     # Periksa dan kirim file baru
+     check_and_send_new_files(repo_path)
+     ```
+
+   - Ganti `YOUR_BOT_TOKEN` dengan token bot Anda.
+   - Ganti `@your_channel_id` dengan ID channel Telegram Anda.
+   - Ganti `/path/to/dorks-eye` dengan path ke direktori repositori `dorks-eye` yang telah di-clone.
+
+### 4. Menjalankan Script Secara Otomatis
+
+1. **Menggunakan Cron Job:**
+   - Anda bisa menggunakan cron job untuk menjalankan script secara berkala.
+     ```bash
+     crontab -e
+     ```
+
+   - Tambahkan baris berikut untuk menjalankan script setiap 5 menit (atau interval waktu yang Anda inginkan):
+     ```bash
+     */5 * * * * /usr/bin/python3 /path/to/upload_to_telegram.py
+     ```
+
+2. **Menggunakan Watchdog untuk Pemantauan Real-Time:**
+   - Instal pustaka `watchdog` untuk memantau perubahan file secara real-time.
+     ```bash
+     pip3 install watchdog
+     ```
+
+   - Buat script baru, misalnya `watchdog_script.py`:
+     ```python
+     import time
+     from watchdog.observers import Observer
+     from watchdog.events
+```

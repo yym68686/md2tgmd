@@ -48,6 +48,15 @@ class LaTeX2Unicode:
             "\\textminus": "\u2212",
 
             # Greek alphabet
+            "\\sin": "sin",
+            "\\lim": "lim",
+            "\\log": "log",
+            "\\ln": "ln",
+            "\\cos": "cos",
+            "\\tan": "tan",
+            "\\cot": "cot",
+            "\\sec": "sec",
+            "\\csc": "csc",
             "\\alpha": "α",
             "\\beta": "β",
             "\\Gamma": "Γ",
@@ -773,6 +782,8 @@ if __name__ == "__main__":
     result = latex2unicode.convert("\Delta t_f = 3.85")
     print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert("\Delta v是速度的变化量")
+    print(result)  # 预期输出: α + β = γ
+    result = latex2unicode.convert("\sin \lim")
     print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert(r"a = \frac{27.8}{3.85} \approx 7.22")
     print(result)  # 预期输出: α + β = γ

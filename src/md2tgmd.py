@@ -173,12 +173,42 @@ def escape(text, flag=0, italic=True):
     text = re.sub(r"~", '\~', text)
     text = re.sub(r"\@{3}(.*?)\@{3}", '~\\1~', text)
 
+    # text = re.sub(r"\n>\s", '\n@*@ ', text, count=1)
+    # matches = list(re.finditer(r"\n>\s", text))
+    # if len(matches) >= 6:
+    #     # 获取第五个匹配项的位置
+    #     fifth_match = matches[5]
+    #     start, end = fifth_match.span()
+
+    #     # 只替换第五个匹配项
+    #     text = text[:start] + '\n@*@ ' + text[end:]
+
+    #     # 获取最后一个匹配项的位置
+    #     last_match = matches[-1]
+    #     start, end = last_match.span()
+
+    #     # 找到该行的结束位置
+    #     line_end = text.find('\n', end)
+    #     if line_end == -1:  # 如果是最后一行
+    #         line_end = len(text)
+
+    #     # 在该行末尾添加 "||"
+    #     text = text[:line_end] + '@!@' + text[line_end:]
+
+    text = re.sub(r"\n>\s", '\n@@@ ', text)
+    # print(text)
     text = re.sub(r">", '\>', text)
+    # text = re.sub(r"\@\*\@", '**>', text)
+    text = re.sub(r"\@{3}", '>', text)
+
     text = replace_all(text, r"(^#+\s.+?\n+)|```[\D\d\s]+?```", escapeshape)
     text = re.sub(r"#", '\#', text)
     text = replace_all(text, r"(\+)|\n[\s]*-\s|```[\D\d\s]+?```|`[\D\d\s]*?`", escapeplus)
+
+    # 数字序号
     text = re.sub(r"\n{1,2}(\s*\d{1,2}\.\s)", '\n\n\\1', text)
-    # # 把 code block 以外的 - 替换掉
+
+    # 把 code block 以外的 - 替换掉
     text = replace_all(text, r"```[\D\d\s]+?```|(-)", escapeminus2)
     text = re.sub(r"-", '@<+@', text)
     text = re.sub(r"\@\+\>\@", '-', text)
@@ -203,12 +233,14 @@ def escape(text, flag=0, italic=True):
     text = re.sub(r"\@{3}([\D\d\s]+?)\@{3}", '```\\1```', text)
     text = re.sub(r"=", '\=', text)
     text = re.sub(r"\|", '\|', text)
+    # text = re.sub(r"\@\!\@", '||', text)
     text = re.sub(r"{", '\{', text)
     text = re.sub(r"}", '\}', text)
     text = re.sub(r"\.", '\.', text)
     text = re.sub(r"!", '\!', text)
     text = find_lines_with_char(text, '`', 5)
     text = replace_all(text, r"(\n+\x20*```[\D\d\s]+?```\n+)", dedent_space)
+    # print(text)
     return text
 
 text = r'''

@@ -473,6 +473,10 @@ class LaTeX2Unicode:
             "\\frac": self.make_fraction
         }
 
+        self.unary_with_option_commands = {
+            "\\sqrt": self.make_sqrt
+        }
+
         # 其他样式映射 (如 bb, bf, cal, frak, it, tt) 也需要定义
 
         # self.subscripts = {
@@ -590,6 +594,27 @@ class LaTeX2Unicode:
 
         return f"{self.maybe_parenthesize(n)}/{self.maybe_parenthesize(d)}"
 
+    def make_sqrt(self, index, radicand):
+        """处理\sqrt命令,支持可选的根次参数"""
+        if not radicand:
+            return ""
+
+        # 根据根次选择合适的根号符号
+        radix = {
+            "": "√",  # 默认为平方根
+            "2": "√",
+            "3": "∛",
+            "4": "∜"
+        }.get(index.strip(), None)
+
+        if radix is None:
+            # 对于其他根次,使用上标
+            sup = self.try_make_superscript(index)
+            radix = f"{sup}√" if sup else f"({index})√"
+
+        # 为被开方数添加上划线
+        return radix + self.translate_combining("\\overline", radicand)
+
     def try_make_subscript(self, s):
         if not s:
             return ""
@@ -663,6 +688,14 @@ class LaTeX2Unicode:
             param1, index = self.parse_block(latex, index)
             param2, index = self.parse_block(latex, index)
             return self.binary_commands[command](param1, param2), index
+        elif command in self.unary_with_option_commands:
+            # 检查是否有可选参数
+            if index < len(latex) and latex[index] == '[':
+                option, index = self.parse_option(latex, index)
+            else:
+                option = ""
+            param, index = self.parse_block(latex, index)
+            return self.unary_with_option_commands[command](option, param), index
         elif command in ["\\left", "\\right"]:
             # 忽略 \left 和 \right 命令
             return "", index
@@ -708,6 +741,23 @@ class LaTeX2Unicode:
         if '\n' in spaces:
             return '\n\n', end
         return ' ', end
+
+    # 添加parse_option方法来解析方括号中的可选参数
+    def parse_option(self, latex, start):
+        """解析[...]形式的可选参数"""
+        if latex[start] != '[':
+            return "", start
+
+        level = 1
+        end = start + 1
+        while end < len(latex) and level > 0:
+            if latex[end] == '[':
+                level += 1
+            elif latex[end] == ']':
+                level -= 1
+            end += 1
+
+        return self.parse(latex[start+1:end-1]), end
 
     def convert(self, latex):
         try:
@@ -757,6 +807,16 @@ class LaTeX2Unicode:
 # 因此，这辆车的加速度约为 7.22 m/s²。
 
 # 因此，欧拉函数 \( \varphi(35) \) 的值是 24。
+
+# 要计算 \( z \cdot \overline{z} \)，我们需要先找到 \( z \) 的共轭。
+
+# 给定 \( z = \sqrt{2}i \)，所以 \( \overline{z} = -\sqrt{2}i \)。
+
+# 然后，计算 \( z \cdot \overline{z} \)：
+
+# \[ z \cdot \overline{z} = (\sqrt{2}i) \cdot (-\sqrt{2}i) = -(\sqrt{2})^2 \cdot i^2 = -2 \cdot (-1) = 2 \]
+
+# 所以答案是 2。选项中没有正确答案，可能有误。
 if __name__ == "__main__":
     latex2unicode = LaTeX2Unicode()
     result = latex2unicode.convert("\\varphi(35) = 35 \\left(1 - \\frac{1}{5}\\right) \\left(1 - \\frac{1}{7}\\right)")
@@ -788,4 +848,6 @@ if __name__ == "__main__":
     result = latex2unicode.convert(r"a = \frac{27.8}{3.85} \approx 7.22")
     print(result)  # 预期输出: α + β = γ
     result = latex2unicode.convert(r"a = \frac{27.8 \, \text{m/s} - 0 \, \text{m/s}}{3.85 \, \text{s}}")
+    print(result)  # 预期输出: α + β = γ
+    result = latex2unicode.convert(r"z \cdot \overline{z} = (\sqrt{2}i) \cdot (-\sqrt{2}i) = -(\sqrt{2})^2 \cdot i^2 = -2 \cdot (-1) = 2")
     print(result)  # 预期输出: α + β = γ

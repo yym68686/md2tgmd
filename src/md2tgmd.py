@@ -121,12 +121,17 @@ def find_lines_with_char(s, char, min_count):
     return "\n".join(lines)
 
 def latex2unicode(text):
+    text = text.strip()
+    blockmath = False
+    if text.startswith("\\["):
+        blockmath = True
     text = re.sub(r"\\\[", "", text)
     text = re.sub(r"\\\]", "", text)
     text = re.sub(r"\\\(", "", text)
     text = re.sub(r"\\\)", "", text)
     result = l2u.convert(text)
-    # result = l2u.convert(rf"{text}")
+    if blockmath:
+        result = "\n\n" + result.strip() + "\n\n"
     return result
 
 def escape(text, flag=0, italic=True):
@@ -134,7 +139,7 @@ def escape(text, flag=0, italic=True):
     # _ * [ ] ( ) ~ ` > # + - = | { } . !
     # must be escaped with the preceding character '\'.
     text = replace_all(text, r"(\\\(.*?\\\))", latex2unicode)
-    text = replace_all(text, r"(\\\[.*?\\\])", latex2unicode)
+    text = replace_all(text, r"(\n*\s*\\\[[\D\d\s]+?\\\]\n*)", latex2unicode)
     text = re.sub(r"\\\[", '@->@', text)
     text = re.sub(r"\\\]", '@<-@', text)
     text = re.sub(r"\\\(", '@-->@', text)

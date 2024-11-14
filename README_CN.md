@@ -2,25 +2,25 @@
 
 [English](README.md) | [Chinese](README_CN.md)
 
-md2tgmd is a Markdown to [Telegram-specific-markdown](https://core.telegram.org/bots/api#formatting-options) converter.
+md2tgmd 是一个将 Markdown 转换为 [Telegram 特定 Markdown](https://core.telegram.org/bots/api#formatting-options) 的转换器。
 
-## Install
+## 安装
 
 ```bash
 pip install md2tgmd
 ```
 
-## Usage
+## 用法
 
 ~~~python
-from md2tgmd import escape
+从 md2tgmd 导入 escape
 
-text = '''
-# title
+文本 = '''
+# 标题
 
-**bold**
+**加粗**
 ```
-# comment
+# 注释
 print(qwer) # ferfe
 ni1
 ```
@@ -28,32 +28,32 @@ ni1
 
 # b
 
-# Header
-## Subheader
+# 标题
+## 子标题
 
 [1.0.0](http://version.com)
 ![1.0.0](http://version.com)
 
-- item 1 -
-    - item 1 -
-    - item 1 -
-* item 2 #
-* item 3 ~
+- 项目 1 -
+    - 项目 1 -
+    - 项目 1 -
+* 项目 2 #
+* 项目 3 ~
 
-1. item 1
-2. item 2
+1. 项目 1
+2. 项目 2
 
 sudo apt install mesa-utils # 安装
 
 ```python
 
-# comment
+# 注释
 print("1.1\n")_
 \subsubsection{1.1}
 ```
 \subsubsection{1.1}
 
-And simple text `with-ten`  `with+ten` + some - **symbols**. # `with-ten`里面的`-`不会被转义
+以及简单文本 `with-ten`  `with+ten` + 一些 - **符号**。 # `with-ten`里面的`-`不会被转义
 
 
 ```
@@ -70,15 +70,15 @@ Cxy = abs (Pxy)**2/ (Pxx*Pyy)
 w`-a----`ccccc`-n-`bbbb``a
 '''
 
-print(escape(text))
+print(escape(文本))
 
 
 '''
-▎*title*
+▎*标题*
 
-*bold*
+*加粗*
 ```
-\# comment
+\# 注释
 print\(qwer\) \# ferfe
 ni1
 ```
@@ -86,39 +86,39 @@ ni1
 
 ▎*b*
 
-▎*Header*
-▎*Subheader*
+▎*标题*
+▎*子标题*
 
 [1\.0\.0](http://version\.com)
 [1\.0\.0](http://version\.com)
 
 
-• item 1 \-
+• 项目 1 \-
 
-    • item 1 \-
+    • 项目 1 \-
 
-    • item 1 \-
+    • 项目 1 \-
 
-• item 2 \#
+• 项目 2 \#
 
-• item 3 \~
+• 项目 3 \~
 
 
-1\. item 1
+1\. 项目 1
 
-2\. item 2
+2\. 项目 2
 
 sudo apt install mesa\-utils \# 安装
 
 ```python
 
-\# comment
+\# 注释
 print\("1\.1\\n"\)\_
 \\subsubsection\{1\.1\}
 ```
 \\subsubsection\{1\.1\}
 
-And simple text `with-ten`  `with+ten` \+ some \- *symbols*\. \# `with-ten`里面的`-`不会被转义
+以及简单文本 `with-ten`  `with+ten` \+ 一些 \- *符号*\. \# `with-ten`里面的`-`不会被转义
 
 
 ```
@@ -134,14 +134,13 @@ Cxy \= abs \(Pxy\)\*\*2/ \(Pxx\*Pyy\)
 ▎*pattern*
 w`-a----`ccccc`-n-`bbbb\`\`a
 '''
-
 ~~~
 
-## Reference
+## 参考文献
 
 https://github.com/skoropadas/telegramify-markdown
 
 
-## License
+## 许可证
 
-This project is licensed under GPLv3, which means you are free to copy, distribute, and modify the software, as long as all modifications and derivative works are also released under the same license.
+本项目根据 GPLv3 许可，这意味着您可以自由复制、分发和修改软件，只要所有修改和衍生作品也根据相同的许可发布。

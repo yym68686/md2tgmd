@@ -4,6 +4,12 @@
 
 md2tgmd 是一个将 Markdown 转换为 [Telegram 特定 Markdown](https://core.telegram.org/bots/api#formatting-options) 的转换器。
 
+## 特性
+
+- 支持 Telegram 特定 Markdown 大部分语法，包括：标题、加粗、斜体、删除线、代码块、链接、引用。
+- 支持 Markdown 中 LaTeX 公式转换为 Unicode 字符，提高数学公式在 Telegram 中显示的可读性
+- 支持 Markdown 中代码块的语法高亮。
+
 ## 安装
 
 ```bash
@@ -17,6 +23,8 @@ pip install md2tgmd
 
 文本 = '''
 # 标题
+
+\[ \\varphi(35) = 35 \\left(1 - \\frac{1}{5}\\right) \\left(1 - \\frac{1}{7}\\right) \]
 
 **加粗**
 ```
@@ -75,6 +83,8 @@ print(escape(文本))
 
 '''
 ▎*标题*
+
+ϕ(35) = 35(1 - ⅕)(1 - 1/7)
 
 *加粗*
 ```

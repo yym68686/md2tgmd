@@ -4,6 +4,12 @@
 
 md2tgmd is a Markdown to [Telegram-specific-markdown](https://core.telegram.org/bots/api#formatting-options) converter.
 
+## Feature
+
+- Supports most of the specific Markdown syntax for Telegram, including: headings, bold, italic, strikethrough, code blocks, links, and quotes.
+- Support the conversion of LaTeX formulas in Markdown to Unicode characters to improve the readability of mathematical formulas in Telegram.
+- Support syntax highlighting for code blocks in Markdown.
+
 ## Install
 
 ```bash
@@ -13,14 +19,16 @@ pip install md2tgmd
 ## Usage
 
 ~~~python
-from md2tgmd import escape
+From md2tgmd import escape
 
 text = '''
-# title
+# Title
 
-**bold**
+\[ \\varphi(35) = 35 \\left(1 - \\frac{1}{5}\\right) \\left(1 - \\frac{1}{7}\\right) \]
+
+**Bold**
 ```
-# comment
+# Comment
 print(qwer) # ferfe
 ni1
 ```
@@ -28,32 +36,32 @@ ni1
 
 # b
 
-# Header
-## Subheader
+# Title
+## Subtitle
 
 [1.0.0](http://version.com)
 ![1.0.0](http://version.com)
 
-- item 1 -
-    - item 1 -
-    - item 1 -
-* item 2 #
-* item 3 ~
+- Item 1 -
+    - Item 1 -
+    - Item 1 -
+* Item 2 #
+* Item 3 ~
 
-1. item 1
-2. item 2
+1. Item 1
+2. Item 2
 
-sudo apt install mesa-utils # 安装
+sudo apt install mesa-utils # Install
 
 ```python
 
-# comment
+# Comment
 print("1.1\n")_
 \subsubsection{1.1}
 ```
 \subsubsection{1.1}
 
-And simple text `with-ten`  `with+ten` + some - **symbols**. # `with-ten`里面的`-`不会被转义
+And simple text `with-ten`  `with+ten` + some - **symbols**. # `-` inside `with-ten` will not be escaped
 
 
 ```
@@ -74,11 +82,13 @@ print(escape(text))
 
 
 '''
-▎*title*
+▎*Title*
 
-*bold*
+ϕ(35) = 35(1 - ⅕)(1 - 1/7)
+
+*Bold*
 ```
-\# comment
+\# Comment
 print\(qwer\) \# ferfe
 ni1
 ```
@@ -86,39 +96,39 @@ ni1
 
 ▎*b*
 
-▎*Header*
-▎*Subheader*
+▎*Title*
+▎*Subtitle*
 
 [1\.0\.0](http://version\.com)
 [1\.0\.0](http://version\.com)
 
 
-• item 1 \-
+• Item 1 \-
 
-    • item 1 \-
+    • Item 1 \-
 
-    • item 1 \-
+    • Item 1 \-
 
-• item 2 \#
+• Item 2 \#
 
-• item 3 \~
+• Item 3 \~
 
 
-1\. item 1
+1\. Item 1
 
-2\. item 2
+2\. Item 2
 
-sudo apt install mesa\-utils \# 安装
+sudo apt install mesa\-utils \# Install
 
 ```python
 
-\# comment
+\# Comment
 print\("1\.1\\n"\)\_
 \\subsubsection\{1\.1\}
 ```
 \\subsubsection\{1\.1\}
 
-And simple text `with-ten`  `with+ten` \+ some \- *symbols*\. \# `with-ten`里面的`-`不会被转义
+And simple text `with-ten`  `with+ten` \+ some \- *symbols*\. \# `-` inside `with-ten` will not be escaped
 
 
 ```
@@ -134,7 +144,6 @@ Cxy \= abs \(Pxy\)\*\*2/ \(Pxx\*Pyy\)
 ▎*pattern*
 w`-a----`ccccc`-n-`bbbb\`\`a
 '''
-
 ~~~
 
 ## Reference

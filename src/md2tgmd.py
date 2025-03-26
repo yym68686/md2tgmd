@@ -225,7 +225,7 @@ def escape(text, flag=0, italic=True):
     # 把 code block 里面的`替换掉
     text = replace_all(text, r"\@\@\@[\s\d\D]+?\@\@\@|(`)", escapebackquoteincode)
     text = re.sub(r"`", '\`', text)
-    text = re.sub(r"\@\<\@", '\`', text)
+    text = re.sub(r"\@\<\@", r'\`', text)
     text = re.sub(r"\@\-\>\@", '`', text)
     text = re.sub(r"\s`\\`\s", ' `\\\\\` ', text)
 
